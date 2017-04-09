@@ -50,10 +50,10 @@ public class CreateEventActivity extends AppCompatActivity {
     private String TAG = "CAMERAERROR: ";
     private String KEY_IMAGE = "eImage";
     private String KEY_NAME = "eventpic.jpg";
-    private String URL = "http://172.30.20.123:300/api/upload";
+    private String URL = "http://172.30.20.123:3000/api/upload";
     private Bitmap bitmap;
     private String eventId;
-    private String CREATE_EVENT_URL = "http://172.30.20.123:300/api/event";
+    private String CREATE_EVENT_URL = "http://172.30.20.123:3000/api/event";
     private EditText mEventName,mEventDescription;
             private DatePicker mdate;
     private TimePicker mTime;
@@ -204,16 +204,13 @@ public class CreateEventActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
-                            String site = jsonResponse.getString("site"),
-                                    network = jsonResponse.getString("network");
-                            System.out.println("Site: "+site+"\nNetwork: "+network);
-                            eventId =response;
-                            uploadImage();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
+//                            JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
+//                            String site = jsonResponse.getString("site"),
+//                                    network = jsonResponse.getString("network");
+//                            System.out.println("Site: "+site+"\nNetwork: "+network);
+                        eventId =response;
+                        uploadImage();
                     }
                 },
                 new Response.ErrorListener() {
