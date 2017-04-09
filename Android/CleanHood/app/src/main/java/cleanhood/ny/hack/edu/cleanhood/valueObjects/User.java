@@ -5,4 +5,7 @@ package cleanhood.ny.hack.edu.cleanhood.valueObjects;
  */
 
 public class User {
+
+
+
 }
