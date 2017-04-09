@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Event {
 
     String name = "";
-    String user = "";
+    String _user = "";
     String _id = "";
     String initialPicURL = "";
     String endPicURL = "";
@@ -29,12 +29,12 @@ public class Event {
         this.name = name;
     }
 
-    public String getUser() {
-        return user;
+    public String get_User() {
+        return _user;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void set_User(String user) {
+        this._user = user;
     }
 
     public String get_id() {

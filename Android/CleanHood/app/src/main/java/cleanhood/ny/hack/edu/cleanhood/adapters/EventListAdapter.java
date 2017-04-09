@@ -70,6 +70,7 @@ public class EventListAdapter extends BaseAdapter {
         mEventname.setText(mEventList.get(i).getName());
         mEventDes.setText(mEventList.get(i).getPurpose());
         mEventDate.setText(mEventList.get(i).getDate());
+        if(mEventList.get(i).getInitialPicURL()!=null)
         new ImageDownloaderTask(imageView).execute(mEventList.get(i).getInitialPicURL());
         v.setOnClickListener(new View.OnClickListener() {
             @Override

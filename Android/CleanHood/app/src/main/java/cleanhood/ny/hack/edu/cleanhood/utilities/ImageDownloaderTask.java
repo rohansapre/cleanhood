@@ -52,7 +52,7 @@ public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
     private Bitmap downloadBitmap(String url) {
         HttpURLConnection urlConnection = null;
         try {
-            URL uri = new URL(url);
+            URL uri = new URL("https://1.bp.blogspot.com/-grMdXo8vzEo/VrLt1AxTV3I/AAAAAAAABf0/Z8fJYjdY3VU/s1600/group%2Bshot%2Bspeakers.jpg");
             urlConnection = (HttpURLConnection) uri.openConnection();
             int statusCode = urlConnection.getResponseCode();
             if (statusCode != HttpURLConnection.HTTP_OK) {
@@ -65,7 +65,7 @@ public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
                 return bitmap;
             }
         } catch (Exception e) {
-            urlConnection.disconnect();
+           // urlConnection.disconnect();
             Log.w("ImageDownloader", "Error downloading image from " + url);
         } finally {
             if (urlConnection != null) {

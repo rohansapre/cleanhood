@@ -55,7 +55,7 @@ public class EventList {
     public ArrayList<Event> getMyHostedEvents(String creatorID){
         ArrayList<Event> myHostedEvents = new ArrayList<Event>();
         for(Event e : events){
-            if(e.getUser().equals(creatorID)){
+            if(e.get_User().equals(creatorID)){
                 myHostedEvents.add(e);
             }
         }
