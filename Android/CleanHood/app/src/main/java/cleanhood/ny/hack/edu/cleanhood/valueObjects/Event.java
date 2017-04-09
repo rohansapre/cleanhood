@@ -8,41 +8,41 @@ import java.util.ArrayList;
 
 public class Event {
 
-    String eventName = "";
-    String creatorID = "";
-    String eventID = "";
+    String name = "";
+    String user = "";
+    String _id = "";
     String initialPicURL = "";
     String endPicURL = "";
     String date = "";
+    String dateCreated = "";
     String time = "";
-    ArrayList<String> eventTags = new ArrayList<String>();
     String purpose = "";
     int numParticipants = 0;
     boolean closed = false;
     String location = "";
 
-    public String getEventName() {
-        return eventName;
+    public String getName() {
+        return name;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCreatorID() {
-        return creatorID;
+    public String getUser() {
+        return user;
     }
 
-    public void setCreatorID(String creatorID) {
-        this.creatorID = creatorID;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public String getEventID() {
-        return eventID;
+    public String get_id() {
+        return _id;
     }
 
-    public void setEventID(String eventID) {
-        this.eventID = eventID;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getInitialPicURL() {
@@ -77,12 +77,12 @@ public class Event {
         this.time = time;
     }
 
-    public ArrayList<String> getEventTags() {
-        return eventTags;
+    public String getDateCreated() {
+        return dateCreated;
     }
 
-    public void setEventTags(ArrayList<String> eventTags) {
-        this.eventTags = eventTags;
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getPurpose() {

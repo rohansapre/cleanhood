@@ -22,6 +22,7 @@ import java.io.File;
 import cleanhood.ny.hack.edu.cleanhood.R;
 import cleanhood.ny.hack.edu.cleanhood.fragments.EventListFragment;
 import cleanhood.ny.hack.edu.cleanhood.utilities.Constants;
+import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
 public class LandingActivity extends AppCompatActivity {
     private int mContainerId ;
@@ -30,6 +31,8 @@ public class LandingActivity extends AppCompatActivity {
     private String mCurrentFragment;
     private static final int TAKE_PICTURE = 1;
     private Uri imageUri;
+    private Event mEvent;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class LandingActivity extends AppCompatActivity {
         fragmentTransaction.commitAllowingStateLoss();
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,5 +117,21 @@ public class LandingActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Event getmEvent(){
+        return mEvent;
+    }
+
+    public void setmEvent(Event e){
+        mEvent = e;
+    }
+
+    public void hideFAB(){
+        fab.hide();
+    }
+
+    public void showFAB(){
+        fab.show();
     }
 }

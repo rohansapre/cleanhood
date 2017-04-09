@@ -10,14 +10,14 @@ import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
 public class EventList {
 
-    EventList instance = null;
+    static EventList instance = null;
     ArrayList<Event> events;
 
     private EventList(){
         events = new ArrayList<Event>();
     }
 
-    public EventList getInstance(){
+    public static EventList getInstance(){
         if(instance == null){
             instance = new EventList();
         }
@@ -55,7 +55,7 @@ public class EventList {
     public ArrayList<Event> getMyHostedEvents(String creatorID){
         ArrayList<Event> myHostedEvents = new ArrayList<Event>();
         for(Event e : events){
-            if(e.getCreatorID().equals(creatorID)){
+            if(e.getUser().equals(creatorID)){
                 myHostedEvents.add(e);
             }
         }

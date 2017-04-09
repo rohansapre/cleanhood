@@ -4,6 +4,7 @@
 module.exports =function(app, Model,io){
 
     var gcm = require('node-gcm');
+    var base64 = require('node-base64-image');
 
     var EventModel = Model.EventModel;
 
@@ -25,13 +26,12 @@ module.exports =function(app, Model,io){
     app.post("/api/event", createEvent);
     app.get("/api/event", findAllEvents);
     app.get("/api/event/:eid", findEventById);
-    app.post("/api/upload", upload.single('myFile'), uploadImage);
     app.post("/api/sendMessage", sendMessage);
+    app.post("/api/upload", uploadImage);
 
 
     function createEvent(req, res) {
         var event = req.body;
-
         EventModel
             .create(event)
             .then(function(newEvent) {
@@ -42,7 +42,6 @@ module.exports =function(app, Model,io){
                 // });
 
                 res.json(newEvent);
-
 
             }, function(err) {
                 res.sendStatus(500).send(err)
@@ -62,10 +61,10 @@ module.exports =function(app, Model,io){
     }
 
     function findAllEvents(req, res) {
-
         EventModel
             .findAllEvents()
             .then(function (allEvents) {
+                console.log(allEvents);
                 res.json(allEvents);
             }, function(err) {
                 res.sendStatus(500).send(err);
@@ -75,21 +74,30 @@ module.exports =function(app, Model,io){
 
     function uploadImage(req, res) {
         var eid = req.body.eid;
-
-        if(req.file){
-            var myFile = req.file;
-            var destination = myFile.destination;
-
-            EventModel
-                .findEventById(eid)
-                .then(function(event) {
-                    event.initialPicURL = req.protocol + '://' + req.get('host') + "/uploads/" + myFile.filename;
-                    event.save();
-                    res.sendStatus(200);
-                }, function(err) {
-                    res.sendStatus(500).send(err);
-                });
-        }
+        var image = req.body.eImage;
+        eid = eid.replace(/['"]+/g, '');
+        var imageName = eid;
+        console.log(imageName);
+        var imageBuffer = new Buffer(image, 'base64');
+        var options = {
+            filename: __dirname + '/../../public/uploads/profile/' + imageName
+        };
+        base64.decode(imageBuffer, options, function (err, success) {
+            if(err) {
+                res.sendStatus(500).send(err);
+            }
+            else {
+                console.log(success);
+                var url = 'public/uploads/profile/' + imageName + '.jpg';
+                EventModel
+                    .updateInitialPicture(eid, url)
+                    .then(function (event) {
+                        res.json(url);
+                    }, function (error) {
+                        res.sendStatus(500).send(error);
+                    });
+            }
+        });
     }
 
     function sendMessage(req, res) {
