@@ -5,6 +5,9 @@ module.exports =function(app, Model){
 
     var EventModel = Model.EventModel;
 
+    var twilioAPI = require('twilio-api');
+    var cli = new twilioAPI.Client("AC509204bc8838c826ec818b178031da98", "63a9bd9bd24591beb0a73e97599d435a");
+
     var multer = require('multer');
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -13,7 +16,7 @@ module.exports =function(app, Model){
         filename: function (req, file, cb) {
             var extArray = file.mimetype.split("/");
             var extension = extArray[extArray.length - 1];
-            cb(null, "widget_image_" + Date.now() + "." + extension)
+            cb(null, "event_image_" + Date.now() + "." + extension)
         }
     });
     var upload = multer({"storage": storage});
@@ -22,7 +25,7 @@ module.exports =function(app, Model){
     app.get("/api/event", findAllEvents);
     app.get("/api/event/:eid", findEventById);
     app.post("/api/upload", upload.single('myFile'), uploadImage);
-
+    app.post("/api/sendMessage", sendMessage);
 
 
     function createEvent(req, res) {
@@ -77,7 +80,17 @@ module.exports =function(app, Model){
                     res.sendStatus(500).send(err);
                 });
         }
+    }
 
+    function sendMessage(req, res) {
+        var num = req.body.num;
+        var event = req.body.event;
+
+        cli.messages.create({
+            to: num,
+            from: '+14403791185',
+            body: 'Hello from Twilio!'
+        });
 
     }
 
