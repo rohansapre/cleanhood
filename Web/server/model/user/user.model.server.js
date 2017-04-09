@@ -7,6 +7,7 @@ mongoose.Promise = q.Promise;
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('User', userSchema);
 
+<<<<<<< e869586cb1aa7b43a9c6bb35844faebe1d44c633
 userModel.createUser = createUser;
 userModel.deleteUser = deleteUser;
 userModel.updateUser = updateUser;
@@ -34,3 +35,7 @@ function findUserById(userId) {
 function findUserByCredentials(username, password) {
     return userModel.findOne({username: username, password: password});
 }
+=======
+module.exports = userModel;
+
+>>>>>>> added all schemas
