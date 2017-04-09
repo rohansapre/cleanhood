@@ -9,6 +9,9 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 import cleanhood.ny.hack.edu.cleanhood.R;
+import cleanhood.ny.hack.edu.cleanhood.activities.LandingActivity;
+import cleanhood.ny.hack.edu.cleanhood.fragments.EventDetailsFragment;
+import cleanhood.ny.hack.edu.cleanhood.utilities.Constants;
 import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
 /**
@@ -41,9 +44,16 @@ public class EventListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View v = inflater.inflate(R.layout.event_list_item,viewGroup,false);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((LandingActivity)mContext).setmEvent(mEventList.get(i));
+                ((LandingActivity)mContext).replaceFragment((new EventDetailsFragment()), Constants.EVENT_DETAILS_FRAGMENT);
+            }
+        });
         return v;
     }
 }

@@ -61,5 +61,5 @@ public class EventList {
         }
         return myHostedEvents;
     }
-
+    
 }

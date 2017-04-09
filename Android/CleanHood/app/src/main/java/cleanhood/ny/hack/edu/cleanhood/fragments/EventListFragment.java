@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cleanhood.ny.hack.edu.cleanhood.R;
+import cleanhood.ny.hack.edu.cleanhood.activities.LandingActivity;
 import cleanhood.ny.hack.edu.cleanhood.adapters.EventListAdapter;
 import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
@@ -35,6 +36,7 @@ public class EventListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ((LandingActivity) getActivity()).showFAB();
         rootView = inflater.inflate(R.layout.event_list_fragment, container, false);
         mEventListView = (ListView) rootView.findViewById(R.id.event_list);
         populateDummyEvent();

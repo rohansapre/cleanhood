@@ -93,7 +93,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 finish();
                 if(userName==null || userName.equals("") ){
-                    Intent i = new Intent(SplashActivity.this,LoginActivity.class);
+                    Intent i = new Intent(SplashActivity.this,LandingActivity.class);
                     startActivity(i);
                 }
                 else{
