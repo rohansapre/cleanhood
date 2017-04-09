@@ -33,6 +33,7 @@ public class LandingActivity extends AppCompatActivity {
     private Uri imageUri;
     private Event mEvent;
     private FloatingActionButton fab;
+    public int currentSpin = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
