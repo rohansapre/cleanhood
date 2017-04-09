@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cleanhood.ny.hack.edu.cleanhood.R;
 import cleanhood.ny.hack.edu.cleanhood.activities.LandingActivity;
+import cleanhood.ny.hack.edu.cleanhood.utilities.ImageDownloaderTask;
 import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
 /**
@@ -49,6 +51,9 @@ public class EventDetailsFragmentJoin extends Fragment {
         tv_date.setText(mEvent.getDate());
         TextView tv_time = (TextView) v.findViewById(R.id.event_details_time);
         tv_time.setText(mEvent.getTime());
+
+        ImageView iv = (ImageView) v.findViewById(R.id.event_details_image);
+        new ImageDownloaderTask(iv).execute(mEvent.getInitialPicURL());
 
         Button bt = (Button) v.findViewById(R.id.btn_participate);
         bt.setOnClickListener(new View.OnClickListener() {
