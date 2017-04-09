@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,7 @@
         <activity
             android:name=".activities.LandingActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme">
@@ -24,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CreateEventActivity"></activity>
+        <activity android:name=".activities.CreateEventActivity" />
 
         <service android:name=".utilities.PushMessagingService">
             <intent-filter>
@@ -37,6 +38,7 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".activities.LoginActivity"></activity>
     </application>
 
 </manifest>
