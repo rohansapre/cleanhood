@@ -1,7 +1,7 @@
 {
-  "name": "web-dev",
+  "name": "cleanhood",
   "version": "1.0.0",
-  "description": "Web Dev at Northeastern University",
+  "description": "Project Developed at HackNY 2017",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.15.1",
@@ -13,6 +13,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Jose G. Annunziato",
+  "author": "Amritansh Tripathi, Bharat Vaidhyanathan, Rakesh Ravi Shankar, Rohan Sapre, Vaibhav Shukla",
   "license": "ISC"
 }

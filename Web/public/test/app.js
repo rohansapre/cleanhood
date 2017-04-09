@@ -23,7 +23,7 @@
             var obj = {
                 message: message
             };
-            $http.post("/api/test", obj)
+            $http.post("/api/setup", obj)
                 .then(
                     findAllMessages,
                     function(err) {
@@ -33,7 +33,7 @@
         }
 
         function deleteMessage(message) {
-            $http.delete("/api/test/" + message._id)
+            $http.delete("/api/setup/" + message._id)
                 .then(
                     findAllMessages,
                     function(err) {
@@ -43,7 +43,7 @@
         }
 
         function findAllMessages() {
-            $http.get("/api/test")
+            $http.get("/api/setup")
                 .then(
                     function(response) {
                         vm.messages = response.data;
