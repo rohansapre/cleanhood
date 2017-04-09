@@ -40,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
     {
         Animation scale = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 // 1 second duration
-        scale.setDuration(3500);
+        scale.setDuration(1500);
 // Moving up
 
 // Launching animation set
@@ -80,7 +80,7 @@ public class SplashActivity extends AppCompatActivity {
             Intent i = new Intent(SplashActivity.this,LandingActivity.class);
                 startActivity(i);
             }
-        },3000);
+        },1500);
     }
 
 }
