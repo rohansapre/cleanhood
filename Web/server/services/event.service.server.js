@@ -1,11 +1,13 @@
 /**
  * Created by Amritansh on 4/8/2017.
  */
-module.exports =function(app, Model){
+module.exports =function(app, Model,io){
 
     var gcm = require('node-gcm');
 
     var EventModel = Model.EventModel;
+
+    var cli = require('twilio')("AC509204bc8838c826ec818b178031da98", "63a9bd9bd24591beb0a73e97599d435a");
 
     var multer = require('multer');
     var storage = multer.diskStorage({
@@ -15,7 +17,7 @@ module.exports =function(app, Model){
         filename: function (req, file, cb) {
             var extArray = file.mimetype.split("/");
             var extension = extArray[extArray.length - 1];
-            cb(null, "widget_image_" + Date.now() + "." + extension)
+            cb(null, "event_image_" + Date.now() + "." + extension)
         }
     });
     var upload = multer({"storage": storage});
@@ -24,7 +26,7 @@ module.exports =function(app, Model){
     app.get("/api/event", findAllEvents);
     app.get("/api/event/:eid", findEventById);
     app.post("/api/upload", upload.single('myFile'), uploadImage);
-
+    app.post("/api/sendMessage", sendMessage);
 
 
     function createEvent(req, res) {
@@ -32,6 +34,10 @@ module.exports =function(app, Model){
         EventModel
             .create(event)
             .then(function(newEvent) {
+                io.on('connection', function(socket){
+                   console.log("Socket event trigger");
+                    socket.emit('event', newEvent);
+                });
                 res.json(newEvent);
             }, function(err) {
                 res.sendStatus(500).send(err)
@@ -80,6 +86,24 @@ module.exports =function(app, Model){
                 });
         }
     }
+
+    function sendMessage(req, res) {
+        var num = req.body.num;
+        var event = req.body.event;
+        console.log(cli);
+
+        cli.messages
+            .create({
+            to: num,
+            from: '+14403791185',
+            body: 'Hello from Cleanhood! Join the cleanup revolution!'
+        })
+            .then(function(){
+                res.sendStatus(200);
+            })
+
+    }
+
 
     function sendNotifications(registrationTokens) {
         var message = new gcm.Message();

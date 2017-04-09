@@ -6,19 +6,24 @@
         .module("Cleanhood")
         .controller("Controller", Controller);
 
-    function Controller($routeParams,Service){
+    function Controller(Service){
         var vm=this;
-        // vm.userId=$routeParams.uid;
-        // vm.websiteId=$routeParams.wid;
-        // function init() {
-        //     PageService
-        //         .findAllPagesForWebsite(vm.websiteId)
-        //         .success(renderPageList);
-        // }
-        // init();
-        //
-        // function renderPageList(pages) {
-        //     vm.pages=pages;
-        // }
+        function init() {
+            Service
+                .findAllEvents
+                .success(renderEvents)
+                .error(function () {
+                    vm.error="Could Not Update Events";
+                });
+        }
+        init();
+
+        function renderEvents(Events) {
+            vm.Events=Events;
+        }
+        var socket = io();
+        socket.on("event", function (newEvent) {
+           vm.newEvent=newEvent;
+        });
     }
 })();
