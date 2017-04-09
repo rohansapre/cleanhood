@@ -18,5 +18,5 @@ module.exports = function (app) {
 
     require('./services/association.service.server')(app,model);
     require('./services/event.service.server')(app,model);
-    require('./services/user.server.service')(app,model);
+    require('./services/user.service.server.js')(app,model);
 };
