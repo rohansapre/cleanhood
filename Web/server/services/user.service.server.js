@@ -3,11 +3,26 @@
  */
 module.exports =function(app, Model){
     var userModel=Model.UserModel;
-    app.get("/api/user",findUserByCredentials);
+    app.post("/api/login",findUserByCredentials);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
     app.post("/api/user", createUser);
+
+    var multer = require('multer');
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, __dirname + "/../../public/uploads/profile")
+        },
+        filename: function (req, file, cb) {
+            var extArray = file.mimeType.split("/");
+            var extension = extArray[extArray.length - 1];
+            cb(null, "profile_picture_" + Date.now() + "." + extension)
+        }
+    });
+    var upload = multer({"storage": storage});
+
+    app.post("/api/upload/profile/:userId", upload.single('profile_picture'), uploadImage);
     
     function createUser(req, res) {
         var user=req.body;
@@ -80,5 +95,20 @@ module.exports =function(app, Model){
                     res.status(404).send(error);
                 }
             )
+    }
+
+    function uploadImage(req, res) {
+        var userId = req.params.userId;
+
+        if (req.file) {
+            var myFile = req.file;
+            var url = req.protocol + '://' + req.get('host') + "/uploads/" + myFile.filename;
+            userModel.updateProfilePicture(userId, url)
+                .then(function (user) {
+                    res.sendStatus(200);
+                }, function (error) {
+                    res.sendStatus(500).send(error);
+                })
+        }
     }
 };
