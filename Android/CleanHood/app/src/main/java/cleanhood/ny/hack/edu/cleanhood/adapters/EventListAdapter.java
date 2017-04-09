@@ -13,6 +13,8 @@ import java.util.List;
 import cleanhood.ny.hack.edu.cleanhood.R;
 import cleanhood.ny.hack.edu.cleanhood.activities.LandingActivity;
 import cleanhood.ny.hack.edu.cleanhood.fragments.EventDetailsFragment;
+import cleanhood.ny.hack.edu.cleanhood.fragments.EventDetailsFragmentHost;
+import cleanhood.ny.hack.edu.cleanhood.fragments.EventDetailsFragmentJoin;
 import cleanhood.ny.hack.edu.cleanhood.utilities.Constants;
 import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
@@ -71,7 +73,23 @@ public class EventListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 ((LandingActivity)mContext).setmEvent(mEventList.get(i));
-                ((LandingActivity)mContext).replaceFragment((new EventDetailsFragment()), Constants.EVENT_DETAILS_FRAGMENT);
+                switch(((LandingActivity)mContext).currentSpin){
+                    case 0:
+                        ((LandingActivity)mContext).replaceFragment((new EventDetailsFragment()), Constants.EVENT_DETAILS_FRAGMENT);
+                        break;
+                    case 1:
+                        ((LandingActivity)mContext).replaceFragment((new EventDetailsFragmentJoin()), Constants.EVENT_DETAILS_FRAGMENT_JOIN);
+                        break;
+                    case 2:
+                        ((LandingActivity)mContext).replaceFragment((new EventDetailsFragment()), Constants.EVENT_DETAILS_FRAGMENT);
+                        break;
+                    case 3:
+                        ((LandingActivity)mContext).replaceFragment((new EventDetailsFragmentHost()), Constants.EVENT_DETAILS_FRAGMENT_HOST);
+                        break;
+                    default:
+                        break;
+                }
+
             }
         });
         return v;

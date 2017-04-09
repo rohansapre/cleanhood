@@ -104,6 +104,7 @@ public class EventListFragment extends Fragment {
                     mEventList = EventList.getInstance().getPastEvents();
                 else
                     mEventList = EventList.getInstance().getMyHostedEvents("58e9f6867023c4b34d86343f");
+                ((LandingActivity) getActivity()).currentSpin = i%4;
                 eventListAdapter.setmEventList(mEventList);
                 eventListAdapter.notifyDataSetChanged();
 
