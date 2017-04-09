@@ -54,6 +54,7 @@ function findAllEvents() {
                 deffered.reject(err);
             }
             else {
+                console.log(allEvents)
                 deffered.resolve(allEvents);
             }
         });

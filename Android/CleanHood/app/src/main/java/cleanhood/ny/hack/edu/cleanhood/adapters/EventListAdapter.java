@@ -17,6 +17,7 @@ import cleanhood.ny.hack.edu.cleanhood.fragments.EventDetailsFragmentHost;
 import cleanhood.ny.hack.edu.cleanhood.fragments.EventDetailsFragmentJoin;
 import cleanhood.ny.hack.edu.cleanhood.utilities.Constants;
 import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
+import cleanhood.ny.hack.edu.cleanhood.utilities.ImageDownloaderTask;
 
 /**
  * Created by vaibhavshukla on 4/9/17.
@@ -69,6 +70,7 @@ public class EventListAdapter extends BaseAdapter {
         mEventname.setText(mEventList.get(i).getName());
         mEventDes.setText(mEventList.get(i).getPurpose());
         mEventDate.setText(mEventList.get(i).getDate());
+        new ImageDownloaderTask(imageView).execute(mEventList.get(i).getInitialPicURL());
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

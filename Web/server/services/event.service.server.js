@@ -10,42 +10,26 @@ module.exports =function(app, Model,io){
 
     var cli = require('twilio')("AC509204bc8838c826ec818b178031da98", "63a9bd9bd24591beb0a73e97599d435a");
 
-    var multer = require('multer');
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, __dirname + "/../../public/uploads")
-        },
-        filename: function (req, file, cb) {
-            var extArray = file.mimetype.split("/");
-            var extension = extArray[extArray.length - 1];
-            cb(null, "event_image_" + Date.now() + "." + extension)
-        }
-    });
-    var upload = multer({"storage": storage});
-
     app.post("/api/event", createEvent);
     app.get("/api/event", findAllEvents);
     app.get("/api/event/:eid", findEventById);
-<<<<<<< 7483c96269781c408750198b09a3654b1656f8a3
-    app.post("/api/upload", upload.single('myFile'), uploadImage);
     app.post("/api/sendMessage", sendMessage);
-=======
-    // app.post("/api/upload", upload.single('myFile'), uploadImage);
     app.post("/api/upload", uploadImage);
->>>>>>> solved image upload using base64 and event server changes
 
 
     function createEvent(req, res) {
         var event = req.body;
-        console.log("reached server");
         EventModel
             .create(event)
             .then(function(newEvent) {
-                io.on('connection', function(socket){
-                   console.log("Socket event trigger");
-                    socket.emit('event', newEvent);
-                });
-                res.json(newEvent._id);
+                // io.on('connection', function(socket){
+                //     console.log("Socket event trigger");
+                //     socket.emit('event', newEvent);
+                //     res.json(newEvent);
+                // });
+
+                res.json(newEvent);
+
             }, function(err) {
                 res.sendStatus(500).send(err)
             });
@@ -66,7 +50,8 @@ module.exports =function(app, Model,io){
     function findAllEvents(req, res) {
         EventModel
             .findAllEvents()
-            .then(function (allEvents) {
+            .then(function (events) {
+                allEvents = {eventList:events};
                 console.log(allEvents);
                 res.json(allEvents);
             }, function(err) {
@@ -83,7 +68,7 @@ module.exports =function(app, Model,io){
         console.log(imageName);
         var imageBuffer = new Buffer(image, 'base64');
         var options = {
-            filename: __dirname + '/../../public/uploads/profile/' + imageName
+            filename: __dirname + '/../../public/uploads/' + imageName
         };
         base64.decode(imageBuffer, options, function (err, success) {
             if(err) {
@@ -91,7 +76,7 @@ module.exports =function(app, Model,io){
             }
             else {
                 console.log(success);
-                var url = 'public/uploads/profile/' + imageName + '.jpg';
+                var url = '/Web/public/uploads/' + imageName + '.jpg';
                 EventModel
                     .updateInitialPicture(eid, url)
                     .then(function (event) {
