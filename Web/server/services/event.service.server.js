@@ -1,7 +1,7 @@
 /**
  * Created by Amritansh on 4/8/2017.
  */
-module.exports =function(app, Model){
+module.exports =function(app, Model,io){
 
     var gcm = require('node-gcm');
 
@@ -34,6 +34,7 @@ module.exports =function(app, Model){
         EventModel
             .create(event)
             .then(function(newEvent) {
+                io.on
                 res.json(newEvent);
             }, function(err) {
                 res.sendStatus(500).send(err)
