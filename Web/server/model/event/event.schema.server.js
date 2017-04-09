@@ -14,7 +14,7 @@ var eventSchema = mongoose.Schema({
     initialPicURL: String,
     endPicURL: String,
     _user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    dateCreated: {type: Date, default: Date.now()}
+    dateCreated: {type: Date, default: new Date()}
 }, {collection: 'event'});
 
 module.exports = eventSchema;

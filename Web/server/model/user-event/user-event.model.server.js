@@ -8,6 +8,7 @@ var UserEventModel = mongoose.model("UserEventModel", userEventSchema);
 
 
 UserEventModel.createParticipation = createParticipation;
+UserEventModel.getParticipantsByEventId = getParticipantsByEventId
 
 
 module.exports = UserEventModel;
@@ -28,3 +29,23 @@ function createParticipation(userId, eventId) {
 
     return deffered.promise;
 }
+
+
+function getParticipantsByEventId(eid) {
+    var deffered = q.defer();
+
+    UserEventModel
+        .find({_event:eid})
+        .then(function(err, participants) {
+            if(err) {
+                deffered.reject(err);
+            }
+            else {
+                deffered.resolve(participants);
+            }
+        });
+
+
+    return deffered.promise;
+}
+

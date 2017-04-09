@@ -8,7 +8,9 @@
 
     function Controller(Service){
         var vm=this;
-        vm.Events = []
+        vm.Events = [];
+        vm.numParticipants = numParticipants;
+
         function init() {
             Service
                 .findAllEvents()
@@ -31,6 +33,18 @@
                 .error(function () {
                     vm.error="Could Not Update Events";
                 });
+        }
+
+
+        function numParticipants(eid) {
+            // Service
+            //     .numParticipants(eid)
+            //     .then(function (participants) {
+            //         console.log("sbafjbjabsfjbsaf")
+            //         return participants.length;
+            //     })
+            return Math.floor((Math.random() * 10) + 1);
+
         }
 
         // socket.on("event", function (newEvent) {

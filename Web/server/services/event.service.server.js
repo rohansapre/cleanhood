@@ -97,7 +97,7 @@ module.exports =function(app, Model,io){
             .create({
             to: num,
             from: '+14403791185',
-            body: 'Hello from Cleanhood! Join the cleanup revolution!'
+            body: 'Hello from Cleanhood! Join the cleanup revolution! Check out this upcoming event: ' + event
         })
             .then(function(){
                 res.sendStatus(200);
