@@ -38,7 +38,7 @@ public class EventDetailsFragment extends Fragment {
         ((LandingActivity) getActivity()).hideFAB();
         View v = inflater.inflate(R.layout.fragment_event_details, container, false);
         TextView tv_name = (TextView) v.findViewById(R.id.event_details_name);
-        tv_name.setText(mEvent.getEventName());
+        tv_name.setText(mEvent.getName());
         TextView tv_desc = (TextView) v.findViewById(R.id.event_details_desc);
         tv_desc.setText(mEvent.getPurpose());
         TextView tv_loc = (TextView) v.findViewById(R.id.event_details_location);

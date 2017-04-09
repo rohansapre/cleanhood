@@ -15,12 +15,16 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -130,9 +134,14 @@ public class SplashActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         // the response is already constructed as a JSONObject!
                         try {
-                            Iterator x = response.keys();
-                            while (x.hasNext()){
-                                EventList.getInstance().getEvents().add((Event)x.next());
+                            Gson gson = new Gson();
+                            JSONArray x =  response.getJSONArray("eventList");
+                            for (int i = 0;i<x.length();i++) {
+                                JsonParser parser = new JsonParser();
+                                JsonElement mJson =  parser.parse(x.get(i).toString());
+                                Event object = gson.fromJson(mJson, Event.class);
+                                EventList.getInstance().getEvents().add(object);
+
                             }
 
                         } catch (Exception e) {
@@ -154,6 +163,16 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        Toast.makeText(SplashActivity.this,"Error response",Toast.LENGTH_LONG).show();
+                        finish();
+                        if(userName==null || userName.equals("") ){
+                            Intent i = new Intent(SplashActivity.this,LandingActivity.class);
+                            startActivity(i);
+                        }
+                        else{
+                            Intent i = new Intent(SplashActivity.this,LandingActivity.class);
+                            startActivity(i);
+                        }
                     }
                 });
 

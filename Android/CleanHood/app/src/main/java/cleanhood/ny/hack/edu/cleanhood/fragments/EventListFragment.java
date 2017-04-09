@@ -3,7 +3,6 @@ package cleanhood.ny.hack.edu.cleanhood.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,7 @@ public class EventListFragment extends Fragment {
     private View rootView;
     private List<Event> mEventList;
     private Spinner mSpinner;
+    EventListAdapter eventListAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class EventListFragment extends Fragment {
         rootView = inflater.inflate(R.layout.event_list_fragment, container, false);
         mEventListView = (ListView) rootView.findViewById(R.id.event_list);
         //populateDummyEvent();
-        EventListAdapter eventListAdapter = new EventListAdapter(mEventList,getActivity());
+         eventListAdapter = new EventListAdapter(mEventList,getActivity());
         mEventListView.setAdapter(eventListAdapter);
         addItemsOnSpinner();
         return rootView;
@@ -60,13 +60,13 @@ public class EventListFragment extends Fragment {
         for(int i=0;i<5;i++)
         {
             Event e = new Event();
-            e.setEventName("Event"+i);
+            e.setName("Event"+i);
             mEventList.add(e);
         }
         for(int i=5;i<10;i++)
         {
             Event e = new Event();
-            e.setEventName("Event"+i);
+            e.setName("Event"+i);
             e.setClosed(true);
             mEventList.add(e);
         }
@@ -92,5 +92,27 @@ public class EventListFragment extends Fragment {
 
         // attaching data adapter to spinner
         mSpinner.setAdapter(dataAdapter);
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i==0)
+                    mEventList = EventList.getInstance().getEvents();
+                else if (i==1)
+                    mEventList = EventList.getInstance().getUpcomingEvents();
+                else if (i==2)
+                    mEventList = EventList.getInstance().getPastEvents();
+                else
+                    mEventList = EventList.getInstance().getMyHostedEvents("58e9f6867023c4b34d86343f");
+                eventListAdapter.setmEventList(mEventList);
+                eventListAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 }

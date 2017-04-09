@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -21,11 +23,21 @@ import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 public class EventListAdapter extends BaseAdapter {
     private List<Event> mEventList;
     private Context mContext;
+    private TextView mEventname,mEventDes,mEventDate;
+    private ImageView imageView;
 
 
     public EventListAdapter(List<Event> mEventList, Context mContext) {
         this.mEventList = mEventList;
         this.mContext = mContext;
+    }
+
+    public List<Event> getmEventList() {
+        return mEventList;
+    }
+
+    public void setmEventList(List<Event> mEventList) {
+        this.mEventList = mEventList;
     }
 
     @Override
@@ -47,6 +59,14 @@ public class EventListAdapter extends BaseAdapter {
     public View getView(final int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View v = inflater.inflate(R.layout.event_list_item,viewGroup,false);
+        imageView = (ImageView) v.findViewById(R.id.event_image);
+        mEventname = (TextView) v.findViewById(R.id.event_name);
+        mEventDes = (TextView) v.findViewById(R.id.event_desc);
+        mEventDate = (TextView) v.findViewById(R.id.event_date);
+
+        mEventname.setText(mEventList.get(i).getName());
+        mEventDes.setText(mEventList.get(i).getPurpose());
+        mEventDate.setText(mEventList.get(i).getDate());
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
