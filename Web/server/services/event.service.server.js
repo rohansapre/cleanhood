@@ -3,6 +3,8 @@
  */
 module.exports =function(app, Model){
 
+    var gcm = require('node-gcm');
+
     var EventModel = Model.EventModel;
 
     var twilioAPI = require('twilio-api');
@@ -89,9 +91,26 @@ module.exports =function(app, Model){
         cli.messages.create({
             to: num,
             from: '+14403791185',
-            body: 'Hello from Twilio!'
+            body: 'Hello from Cleanhood! Join the cleanup revolution!'
+        });
+    }
+
+
+    function sendNotifications(registrationTokens) {
+        var message = new gcm.Message();
+        message.addData({
+            key1: 'Welcome to push notification',
+            key2: 'How do you feel now?'
         });
 
+        var sender = new gcm.Sender(process.env.GOOGLE_API_KEY);
+
+        sender.send(message, { registrationTokens: registrationTokens }, function (err, response) {
+            if(err)
+                console.log(err);
+            else
+                console.log(response);
+        });
     }
 
 

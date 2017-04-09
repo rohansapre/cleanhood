@@ -1,7 +1,7 @@
 /**
  * Created by rohansapre on 4/8/17.
  */
-module.exports = function (app) {
+module.exports = function (app,io) {
     var UserModel= require('./model/user/user.model.server');
     var EventModel= require('./model/event/event.model.server');
     var EventInterestModel=require('./model/event-interest/event-interest.model.server');
@@ -14,9 +14,9 @@ module.exports = function (app) {
         UserModel:UserModel,
         EventInterestModel:EventInterestModel,
         UserInterestModel:UserInterestModel
-    }
+    };
 
     require('./services/association.service.server')(app,model);
     require('./services/event.service.server')(app,model);
-    require('./services/user.server.service')(app,model);
+    require('./services/user.service.server.js')(app,model);
 };

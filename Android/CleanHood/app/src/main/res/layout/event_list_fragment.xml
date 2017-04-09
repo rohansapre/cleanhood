@@ -5,20 +5,17 @@
     android:id="@+id/content_landing"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="cleanhood.ny.hack.edu.cleanhood.activities.LandingActivity"
     android:orientation="vertical"
     tools:showIn="@layout/activity_landing">
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:id="@+id/event_list"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:scrollbars="vertical"
+        android:layout_height="wrap_content"
+
+        android:layout_width="wrap_content"
         >
-        </android.support.v7.widget.RecyclerView>
+        </ListView>
 </LinearLayout>
