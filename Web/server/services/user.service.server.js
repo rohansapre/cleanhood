@@ -81,6 +81,4 @@ module.exports =function(app, Model){
                 }
             )
     }
-    
-    
 };
