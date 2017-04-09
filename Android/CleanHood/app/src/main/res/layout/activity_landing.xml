@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/container_fragment"
-        layout="@layout/content_landing" />
+        layout="@layout/event_list_fragment" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
