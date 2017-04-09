@@ -16,8 +16,23 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
+import java.util.List;
+
 import cleanhood.ny.hack.edu.cleanhood.R;
 import cleanhood.ny.hack.edu.cleanhood.utilities.Constants;
+import cleanhood.ny.hack.edu.cleanhood.utilities.EventList;
+import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -41,6 +56,7 @@ public class SplashActivity extends AppCompatActivity {
         mLogo = (ImageView) findViewById(R.id.app_logo);
         mLoadingText = (TextView) findViewById(R.id.loading_text);
         scaleLogo();
+
     }
 
     public void checkUser()
@@ -70,7 +86,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 mLoadingText.setVisibility(View.VISIBLE);
-                startHandler();
+                fetchEvents();
             }
 
             @Override
@@ -104,5 +120,44 @@ public class SplashActivity extends AppCompatActivity {
         },2000);
     }
 
+
+    public void fetchEvents() {
+        String url = "http://172.30.20.123:3000/api/event";
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // the response is already constructed as a JSONObject!
+                        try {
+                            Iterator x = response.keys();
+                            while (x.hasNext()){
+                                EventList.getInstance().getEvents().add((Event)x.next());
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        finish();
+                        if(userName==null || userName.equals("") ){
+                            Intent i = new Intent(SplashActivity.this,LandingActivity.class);
+                            startActivity(i);
+                        }
+                        else{
+                            Intent i = new Intent(SplashActivity.this,LandingActivity.class);
+                            startActivity(i);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+
+        Volley.newRequestQueue(this).add(jsonRequest);
+    }
 }
 

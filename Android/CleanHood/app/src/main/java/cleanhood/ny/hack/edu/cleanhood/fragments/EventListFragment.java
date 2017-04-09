@@ -35,7 +35,7 @@ public class EventListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEventList = new ArrayList<Event>();
+        mEventList = EventList.getInstance().getEvents();
 
     }
 
@@ -45,7 +45,7 @@ public class EventListFragment extends Fragment {
         ((LandingActivity) getActivity()).showFAB();
         rootView = inflater.inflate(R.layout.event_list_fragment, container, false);
         mEventListView = (ListView) rootView.findViewById(R.id.event_list);
-        populateDummyEvent();
+        //populateDummyEvent();
         EventListAdapter eventListAdapter = new EventListAdapter(mEventList,getActivity());
         mEventListView.setAdapter(eventListAdapter);
         addItemsOnSpinner();
