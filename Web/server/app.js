@@ -1,7 +1,7 @@
 /**
  * Created by rohansapre on 4/8/17.
  */
-module.exports = function (app) {
+module.exports = function (app,io) {
     var UserModel= require('./model/user/user.model.server');
     var EventModel= require('./model/event/event.model.server');
     var EventInterestModel=require('./model/event-interest/event-interest.model.server');
