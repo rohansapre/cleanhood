@@ -25,6 +25,9 @@ module.exports =function(app, Model){
     app.post("/api/upload/profile/:userId", upload.single('profile_picture'), uploadImage);
     
     function createUser(req, res) {
+
+        // username, password, email
+
         var user=req.body;
         userModel
             .createUser(user)
@@ -68,7 +71,9 @@ module.exports =function(app, Model){
     }
     
     function findUserById(req,res) {
+        console.log("reached userId");
         var userId=req.params.userId;
+        console.log(userId);
         userModel
             .findUserById(userId)
             .then(
