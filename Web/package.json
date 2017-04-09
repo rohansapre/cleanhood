@@ -7,14 +7,11 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "mongoose": "^4.4.15",
-
     "multer": "^1.2.0",
     "node-gcm": "^0.14.5",
-
     "socket.io": "^1.7.3",
-
     "q": "^1.4.1",
-    "socket.io": "^1.7.3"
+    "node-base64-image": "^1.0.3"
   },
   "devDependencies": {},
   "scripts": {

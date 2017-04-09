@@ -9,6 +9,7 @@ var EventModel = mongoose.model("EventModel", eventSchema);
 EventModel.createEvent = createEvent;
 EventModel.findAllEvents = findAllEvents;
 EventModel.findEventById = findEventById;
+EventModel.updateInitialPicture = updateInitialPicture;
 
 module.exports = EventModel;
 
@@ -47,7 +48,8 @@ function findAllEvents() {
     var deffered = q.defer();
     EventModel
         .find()
-        .sort({dateCreated: -1}, function(err, allEvents) {
+        .sort({dateCreated: -1})
+        .exec(function(err, allEvents) {
             if(err){
                 deffered.reject(err);
             }
@@ -55,5 +57,16 @@ function findAllEvents() {
                 deffered.resolve(allEvents);
             }
         });
+    return deffered.promise;
+}
+
+function updateInitialPicture(eventId, url) {
+    var deffered = q.defer();
+    EventModel.update({_id: eventId}, {$set: {initialPicURL: url}}, function (err, event) {
+        if(err)
+            deffered.reject(err);
+        else
+            deffered.resolve(event);
+    });
     return deffered.promise;
 }
