@@ -35,7 +35,10 @@ module.exports =function(app, Model,io){
         EventModel
             .create(event)
             .then(function(newEvent) {
-                io.on
+                io.on('connection', function(socket){
+                   console.log("Socket event trigger");
+                    socket.emit('event', newEvent);
+                });
                 res.json(newEvent);
             }, function(err) {
                 res.sendStatus(500).send(err)

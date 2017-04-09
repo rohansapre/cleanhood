@@ -8,8 +8,12 @@
 
     function Service($http) {
         var api={
-
+            findAllEvents:findAllEvents
         }
         return api;
+
+        function findAllEvents() {
+            return $http.get("/api/event");
+        }
     }
 })();
