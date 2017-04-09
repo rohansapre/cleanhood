@@ -31,14 +31,19 @@ module.exports =function(app, Model,io){
 
     function createEvent(req, res) {
         var event = req.body;
+
         EventModel
             .create(event)
             .then(function(newEvent) {
-                io.on('connection', function(socket){
-                   console.log("Socket event trigger");
-                    socket.emit('event', newEvent);
-                });
+                // io.on('connection', function(socket){
+                //     console.log("Socket event trigger");
+                //     socket.emit('event', newEvent);
+                //     res.json(newEvent);
+                // });
+
                 res.json(newEvent);
+
+
             }, function(err) {
                 res.sendStatus(500).send(err)
             });

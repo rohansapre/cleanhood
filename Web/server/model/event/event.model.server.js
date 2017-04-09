@@ -47,11 +47,13 @@ function findAllEvents() {
     var deffered = q.defer();
     EventModel
         .find()
-        .sort({dateCreated: -1}, function(err, allEvents) {
+        .sort({dateCreated: -1})
+        .exec(function(err, allEvents) {
             if(err){
                 deffered.reject(err);
             }
             else {
+                console.log(allEvents)
                 deffered.resolve(allEvents);
             }
         });
