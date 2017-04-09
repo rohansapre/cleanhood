@@ -14,9 +14,9 @@ module.exports = function (app,io) {
         UserModel:UserModel,
         EventInterestModel:EventInterestModel,
         UserInterestModel:UserInterestModel
-    }
+    };
 
     require('./services/association.service.server')(app,model);
     require('./services/event.service.server')(app,model);
-    require('./services/user.server.service')(app,model);
+    require('./services/user.service.server.js')(app,model);
 };

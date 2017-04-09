@@ -10,13 +10,16 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 
+
 io.on('connection', function(socket){
     console.log('a user connected');
 });
 
 require ("./setup/app.js")(app);
-var assignment=require("./server/app");
-assignment(app,io);
+
+var server = require('./server/app.js');
+server(app);
+
 var port = process.env.PORT || 3000;
 
 http.listen(port);

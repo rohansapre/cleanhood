@@ -7,4 +7,5 @@ package cleanhood.ny.hack.edu.cleanhood.utilities;
 public class Constants {
 
     public static final String EVENT_LIST_FRAGMENT="eventListFragment";
+    public static final String IMAGE_URI = "image_uri";
 }
