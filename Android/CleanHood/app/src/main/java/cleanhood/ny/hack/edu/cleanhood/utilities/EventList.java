@@ -10,14 +10,14 @@ import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
 public class EventList {
 
-    EventList instance = null;
+    static EventList instance = null;
     ArrayList<Event> events;
 
     private EventList(){
         events = new ArrayList<Event>();
     }
 
-    public EventList getInstance(){
+    public static EventList getInstance(){
         if(instance == null){
             instance = new EventList();
         }
@@ -61,5 +61,5 @@ public class EventList {
         }
         return myHostedEvents;
     }
-    
+
 }
