@@ -3,6 +3,8 @@
  */
 module.exports =function(app, Model){
 
+    var gcm = require('node-gcm');
+
     var EventModel = Model.EventModel;
 
     var multer = require('multer');
@@ -77,8 +79,23 @@ module.exports =function(app, Model){
                     res.sendStatus(500).send(err);
                 });
         }
+    }
 
+    function sendNotifications(registrationTokens) {
+        var message = new gcm.Message();
+        message.addData({
+            key1: 'Welcome to push notification',
+            key2: 'How do you feel now?'
+        });
 
+        var sender = new gcm.Sender(process.env.GOOGLE_API_KEY);
+
+        sender.send(message, { registrationTokens: registrationTokens }, function (err, response) {
+            if(err)
+                console.log(err);
+            else
+                console.log(response);
+        });
     }
 
 
