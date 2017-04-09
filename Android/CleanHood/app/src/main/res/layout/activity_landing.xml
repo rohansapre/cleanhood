@@ -21,7 +21,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_landing" />
+    <include
+        android:id="@+id/container_fragment"
+        layout="@layout/event_list_fragment" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
