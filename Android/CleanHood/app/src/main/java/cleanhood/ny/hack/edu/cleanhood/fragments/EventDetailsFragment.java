@@ -1,15 +1,18 @@
 package cleanhood.ny.hack.edu.cleanhood.fragments;
 
 
+import android.media.Image;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cleanhood.ny.hack.edu.cleanhood.R;
 import cleanhood.ny.hack.edu.cleanhood.activities.LandingActivity;
+import cleanhood.ny.hack.edu.cleanhood.utilities.ImageDownloaderTask;
 import cleanhood.ny.hack.edu.cleanhood.valueObjects.Event;
 
 /**
@@ -47,6 +50,8 @@ public class EventDetailsFragment extends Fragment {
         tv_date.setText(mEvent.getDate());
         TextView tv_time = (TextView) v.findViewById(R.id.event_details_time);
         tv_time.setText(mEvent.getTime());
+        ImageView iv = (ImageView) v.findViewById(R.id.event_details_image);
+        new ImageDownloaderTask(iv).execute(mEvent.getInitialPicURL());
         return v;
     }
 
