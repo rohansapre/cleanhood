@@ -7,12 +7,10 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "mongoose": "^4.4.15",
-
-    "socket.io": "^1.7.3"
-
+    "multer": "^1.2.0",
+    "node-gcm": "^0.14.5",
     "q": "^1.4.1",
-    "multer": "^1.2.0"
-
+    "socket.io": "^1.7.3"
   },
   "devDependencies": {},
   "scripts": {
