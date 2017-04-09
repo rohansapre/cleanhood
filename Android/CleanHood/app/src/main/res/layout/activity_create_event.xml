@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<LinearLayout
     android:id="@+id/activity_create_event"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,20 +10,46 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cleanhood.ny.hack.edu.cleanhood.activities.CreateEventActivity">
+    android:gravity="center"
+    android:orientation="vertical">
 
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_slideshow"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="143dp"
-        android:layout_marginStart="143dp"
-        android:layout_marginTop="149dp"
+        android:src="@android:drawable/ic_menu_slideshow"
         android:id="@+id/imageView" />
+    <EditText
+        android:id="@+id/enter_event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Event Name..."
+        />
+    <EditText
+        android:id="@+id/enter_event_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Event Description..."
+        />
+    <DatePicker
+        android:id="@+id/enter_event_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
+    <TimePicker
+        android:id="@+id/enter_event_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/create_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Create Event"
+        />
+
+</LinearLayout>
+</ScrollView>
